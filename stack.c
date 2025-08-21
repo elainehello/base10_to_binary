@@ -9,3 +9,9 @@ int binary_push(t_binary *bin, int *bit)
 }
 
 int binary_pop(t_binary *bin, int *bit)
+{
+    if (bin->size <= 0) // if true (underflow)
+        return (EXIT_FAILURE);
+    *bit = bin->bits[--bin->size];
+    return (EXIT_SUCCESS);
+}

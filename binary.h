@@ -15,5 +15,7 @@ typedef struct s_binary {
 
 int binary_push(t_binary *bin, int *bit);
 int binary_pop(t_binary *bin, int *bit);
+int decimal_to_binary(int n, t_binary *bin);
+
 
 #endif
