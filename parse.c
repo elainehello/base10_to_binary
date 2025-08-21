@@ -14,7 +14,7 @@ int atoi_ascii(const char *argv)
     // skip space, tab and newline
     while (argv[i] == 32 || argv[i] == 9 || argv[i] == 10)
         i++;
-    if (argv[i] == '-' || argv[i] == '+') 
+    if (argv[i] == '-' || argv[i] == '+')
     {
         if (argv[i] == '-')
             sign = -1;
@@ -39,15 +39,32 @@ int atoi_ascii(const char *argv)
     return ((int)result);
 }
 
-
-/* int decimal_to_binary(int n, t_binary *bin)
+int decimal_to_binary(int n, t_binary *bin)
 {
+    int bit;
 
-} */
+    bin->size = 0;
+    if (n == 0)
+    {
+        bit = 0;
+        binary_push(bin, bit);
+        return (EXIT_SUCCESS);
+    }
+    while (n > 0)
+    {
+        bit = n & 1;
+        if (binary_push(bin, bit) == EXIT_FAILURE)
+            return (EXIT_FAILURE);
+        n >>= 1;
+    }
+    return (EXIT_SUCCESS);
+}
 
 int main(int argc, char **argv)
 {
     int result;
+    t_binary bin;
+    int i;
 
     if (argc <= 1)
     {
@@ -56,5 +73,15 @@ int main(int argc, char **argv)
     }
     result = atoi_ascii(argv[1]);
     ft_printf("\n%d\n", result);
-    return (0);    
+    ft_printf("decimal to binary expression:\n");
+    bin.size = 0;
+    i = 0;
+    if (decimal_to_binary(result, &bin) == EXIT_SUCCESS)
+    {
+        i = bin.size - 1;
+        while (i >= 0)
+            ft_printf("%d", bin.bits[i]);
+        ft_printf("\n");
+    }
+    return (0);
 }
