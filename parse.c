@@ -23,7 +23,7 @@ int atoi_ascii(const char *argv)
     if (argv[i] < '0' || argv[i] > '9')
         return (EXIT_FAILURE);
     digit = 0;
-    while (argv[i] > '0' && argv[i] < '9')
+    while (argv[i] >= '0' && argv[i] <= '9')
     {
         digit = argv[i] - 48;
         if (result > (LONG_MAX - digit) / 10)
@@ -80,7 +80,10 @@ int main(int argc, char **argv)
     {
         i = bin.size - 1;
         while (i >= 0)
+        {
             ft_printf("%d", bin.bits[i]);
+            i--;
+        }
         ft_printf("\n");
     }
     return (0);
